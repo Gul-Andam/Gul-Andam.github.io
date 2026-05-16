@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gul Andam | AI & Machine Learning Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f0f4ff;
+  --bg2: #e8eeff;
+  --white: #ffffff;
+  --card: #ffffff;
+  --indigo: #4f46e5;
+  --violet: #7c3aed;
+  --pink: #ec4899;
+  --orange: #f97316;
+  --emerald: #10b981;
+  --yellow: #fbbf24;
+  --sky: #0ea5e9;
+  --text: #1e1b4b;
+  --muted: #6b7280;
+  --border: #e0e7ff;
+  --grad1: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%);
+  --grad2: linear-gradient(135deg, #0ea5e9 0%, #4f46e5 100%);
+  --grad3: linear-gradient(135deg, #10b981 0%, #0ea5e9 100%);
+  --shadow: 0 20px 60px rgba(79,70,229,0.15);
+  --shadow-sm: 0 4px 20px rgba(79,70,229,0.1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+
+.bg-blobs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.18; animation: blobFloat 8s ease-in-out infinite; }
+.blob-1 { width: 600px; height: 600px; background: #4f46e5; top: -200px; right: -100px; animation-delay: 0s; }
+.blob-2 { width: 500px; height: 500px; background: #ec4899; bottom: -150px; left: -100px; animation-delay: -3s; }
+.blob-3 { width: 400px; height: 400px; background: #0ea5e9; top: 40%; left: 40%; animation-delay: -6s; }
+@keyframes blobFloat { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(30px,-20px) scale(1.05)} 66%{transform:translate(-20px,15px) scale(0.97)} }
+
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  padding: 16px 60px; display: flex; justify-content: space-between; align-items: center;
+  background: rgba(240,244,255,0.88); backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(79,70,229,0.1);
+}
+.nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; background: var(--grad1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--indigo); }
+.nav-cta { background: var(--grad1); color: white; padding: 11px 28px; font-weight: 600; font-size: 0.88rem; border-radius: 50px; text-decoration: none; box-shadow: 0 4px 20px rgba(79,70,229,0.35); transition: transform 0.2s, box-shadow 0.2s; }
+.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(79,70,229,0.45); }
+
+.hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 60px 80px; position: relative; z-index: 1; }
+.hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
+
+.hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(79,70,229,0.1); border: 1px solid rgba(79,70,229,0.2); color: var(--indigo); padding: 6px 16px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.7s 0.2s forwards; }
+.dot { width: 7px; height: 7px; background: var(--emerald); border-radius: 50%; animation: blink 1.5s infinite; display: inline-block; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero-title { font-family: 'Syne', sans-serif; font-size: clamp(2.8rem, 5.5vw, 5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; color: var(--text); opacity: 0; animation: fadeUp 0.7s 0.4s forwards; margin-bottom: 20px; }
+.grad-text { background: var(--grad1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.hero-sub { font-size: 1.02rem; color: var(--muted); line-height: 1.75; max-width: 520px; opacity: 0; animation: fadeUp 0.7s 0.6s forwards; margin-bottom: 40px; }
+.hero-sub strong { color: var(--text); font-weight: 600; }
+
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.7s 0.8s forwards; }
+.btn-primary { background: var(--grad1); color: white; padding: 15px 32px; font-weight: 700; font-size: 0.92rem; border-radius: 50px; text-decoration: none; box-shadow: 0 8px 28px rgba(79,70,229,0.4); transition: transform 0.2s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(79,70,229,0.5); }
+.btn-secondary { background: white; color: var(--indigo); padding: 15px 32px; font-weight: 600; font-size: 0.92rem; border-radius: 50px; text-decoration: none; border: 2px solid var(--border); box-shadow: var(--shadow-sm); transition: border-color 0.2s, transform 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+.btn-secondary:hover { border-color: var(--indigo); transform: translateY(-3px); }
+
+.hero-visual { opacity: 0; animation: fadeUp 0.9s 0.5s forwards; display: flex; flex-direction: column; gap: 16px; }
+.hero-card { background: white; border-radius: 20px; padding: 24px 28px; box-shadow: var(--shadow-sm); border: 1px solid var(--border); }
+.hero-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.card-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+.card-badge { font-size: 0.7rem; font-weight: 700; padding: 4px 12px; border-radius: 50px; background: rgba(16,185,129,0.12); color: var(--emerald); }
+.accuracy-bar { height: 10px; background: #f0f4ff; border-radius: 10px; overflow: hidden; margin: 8px 0; }
+.accuracy-fill { height: 100%; border-radius: 10px; background: var(--grad1); width: 97%; animation: fillBar 1.5s 1.2s ease-out both; }
+@keyframes fillBar { from{width:0} }
+.accuracy-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; background: var(--grad1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-mini-cards { display: flex; gap: 12px; }
+.mini-card { flex: 1; background: white; border-radius: 16px; padding: 18px; box-shadow: var(--shadow-sm); border: 1px solid var(--border); text-align: center; }
+.mini-num { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; background: var(--grad2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.mini-label { font-size: 0.68rem; color: var(--muted); margin-top: 2px; font-weight: 500; }
+
+section { padding: 100px 60px; position: relative; z-index: 1; }
+.section-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--indigo); letter-spacing: 0.14em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 10px; background: rgba(79,70,229,0.08); padding: 6px 16px; border-radius: 50px; margin-bottom: 16px; }
+.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800; color: var(--text); letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 60px; }
+.section-title em { font-style: normal; background: var(--grad1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+#about { background: white; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1100px; }
+.about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 18px; font-size: 1rem; }
+.about-text p strong { color: var(--text); font-weight: 600; }
+.about-info-card { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); border-radius: 24px; padding: 40px; border: 1px solid rgba(124,58,237,0.15); }
+.info-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(124,58,237,0.1); }
+.info-row:last-child { border-bottom: none; }
+.info-key { font-size: 0.8rem; font-weight: 600; color: var(--muted); }
+.info-val { font-size: 0.88rem; font-weight: 600; color: var(--text); text-align: right; }
+.open-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(16,185,129,0.12); color: var(--emerald); border: 1px solid rgba(16,185,129,0.25); padding: 4px 14px; border-radius: 50px; font-size: 0.78rem; font-weight: 700; }
+
+#skills { background: var(--bg2); }
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1100px; }
+.skill-card { background: white; border-radius: 20px; padding: 32px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
+.skill-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+.skill-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; border-radius: 20px 20px 0 0; }
+.skill-card:nth-child(1)::before { background: var(--grad1); }
+.skill-card:nth-child(2)::before { background: var(--grad2); }
+.skill-card:nth-child(3)::before { background: linear-gradient(135deg,#10b981,#0ea5e9); }
+.skill-card:nth-child(4)::before { background: linear-gradient(135deg,#f97316,#fbbf24); }
+.skill-card:nth-child(5)::before { background: linear-gradient(135deg,#ec4899,#7c3aed); }
+.skill-card:nth-child(6)::before { background: linear-gradient(135deg,#0ea5e9,#10b981); }
+.skill-icon-wrap { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 18px; }
+.ic-1{background:rgba(79,70,229,0.1)} .ic-2{background:rgba(14,165,233,0.1)} .ic-3{background:rgba(16,185,129,0.1)} .ic-4{background:rgba(249,115,22,0.1)} .ic-5{background:rgba(236,72,153,0.1)} .ic-6{background:rgba(124,58,237,0.1)}
+.skill-name { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+.skill-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.skill-tag { font-size: 0.7rem; font-weight: 600; padding: 4px 12px; border-radius: 50px; background: var(--bg); color: var(--indigo); border: 1px solid rgba(79,70,229,0.15); }
+
+#projects { background: white; }
+.projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 1100px; }
+.project-card { background: white; border-radius: 24px; border: 1px solid var(--border); padding: 36px; overflow: hidden; position: relative; box-shadow: var(--shadow-sm); transition: transform 0.3s, box-shadow 0.3s; }
+.project-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+.project-card.featured { grid-column: 1 / -1; background: linear-gradient(135deg,#4f46e5 0%,#7c3aed 60%,#ec4899 100%); }
+.project-card.featured .project-num,.project-card.featured .project-desc { color: rgba(255,255,255,0.75); }
+.project-card.featured .project-title { color: white; }
+.project-card.featured .stack-tag { color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); }
+.project-card.featured .project-link { color: white; border-color: rgba(255,255,255,0.4); }
+.project-card.featured .project-link:hover { background: white; color: var(--indigo); border-color: white; }
+.project-num { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 16px; }
+.project-title { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 12px; }
+.project-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+.project-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.stack-tag { font-size: 0.72rem; font-weight: 600; padding: 5px 14px; border-radius: 50px; background: var(--bg); color: var(--violet); border: 1px solid rgba(124,58,237,0.15); }
+.project-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.83rem; font-weight: 700; color: var(--indigo); border: 2px solid var(--border); padding: 9px 22px; border-radius: 50px; text-decoration: none; transition: background 0.2s, border-color 0.2s, color 0.2s, gap 0.2s; }
+.project-link:hover { background: var(--indigo); color: white; border-color: var(--indigo); gap: 14px; }
+
+#research { background: var(--bg2); }
+.research-list { max-width: 1100px; display: flex; flex-direction: column; gap: 20px; }
+.research-card { background: white; border-radius: 20px; padding: 36px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); display: flex; gap: 32px; align-items: flex-start; transition: transform 0.3s, box-shadow 0.3s; }
+.research-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.research-num-badge { min-width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: white; flex-shrink: 0; }
+.rn-1{background:var(--grad1)} .rn-2{background:var(--grad2)}
+.research-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+.research-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+.research-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.r-tag { font-size: 0.7rem; font-weight: 700; padding: 4px 14px; border-radius: 50px; background: rgba(249,115,22,0.09); color: var(--orange); border: 1px solid rgba(249,115,22,0.2); }
+
+.cta-banner { background: var(--grad1); padding: 80px 60px; text-align: center; position: relative; z-index: 1; overflow: hidden; }
+.cta-banner::before { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E"); }
+.cta-banner h2 { font-family:'Syne',sans-serif; font-size:clamp(1.8rem,4vw,3rem); font-weight:800; color:white; margin-bottom:16px; letter-spacing:-0.02em; position:relative; }
+.cta-banner p { color:rgba(255,255,255,0.82); font-size:1.05rem; margin-bottom:36px; position:relative; }
+.cta-banner-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; position:relative; }
+.btn-white { background:white; color:var(--indigo); padding:15px 34px; border-radius:50px; font-weight:700; font-size:0.92rem; text-decoration:none; box-shadow:0 8px 24px rgba(0,0,0,0.15); transition:transform 0.2s,box-shadow 0.2s; }
+.btn-white:hover { transform:translateY(-3px); box-shadow:0 14px 36px rgba(0,0,0,0.2); }
+.btn-outline-white { background:transparent; color:white; padding:15px 34px; border-radius:50px; font-weight:700; font-size:0.92rem; text-decoration:none; border:2px solid rgba(255,255,255,0.5); transition:background 0.2s,border-color 0.2s; }
+.btn-outline-white:hover { background:rgba(255,255,255,0.15); border-color:white; }
+
+#contact { background: white; }
+.contact-wrap { max-width: 1100px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.contact-left h3 { font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800; color:var(--text); margin-bottom:12px; letter-spacing:-0.02em; }
+.contact-left p { color:var(--muted); line-height:1.75; margin-bottom:32px; font-size:0.95rem; }
+.contact-items { display:flex; flex-direction:column; gap:12px; }
+.contact-item { display:flex; align-items:center; gap:16px; text-decoration:none; padding:14px 18px; background:var(--bg); border-radius:16px; border:1px solid var(--border); transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s; }
+.contact-item:hover { transform:translateX(6px); border-color:var(--indigo); box-shadow:var(--shadow-sm); }
+.contact-icon { width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; color:white; font-weight:700; }
+.ci-1{background:var(--grad1)} .ci-2{background:linear-gradient(135deg,#0077b5,#00a0dc)} .ci-3{background:linear-gradient(135deg,#333,#666)} .ci-4{background:var(--grad3)} .ci-5{background:linear-gradient(135deg,#10b981,#16a34a)} .ci-wa{background:linear-gradient(135deg,#25d366,#128c7e)}
+.contact-item-label { font-size:0.7rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; display:block; }
+.contact-item-val { font-size:0.88rem; font-weight:600; color:var(--text); }
+
+.contact-form { display:flex; flex-direction:column; gap:18px; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.form-group { display:flex; flex-direction:column; gap:6px; }
+.form-label { font-size:0.78rem; font-weight:700; color:var(--text); }
+.form-input,.form-textarea { background:var(--bg); border:1.5px solid var(--border); color:var(--text); padding:13px 16px; border-radius:12px; font-family:'Plus Jakarta Sans',sans-serif; font-size:0.9rem; outline:none; transition:border-color 0.2s,box-shadow 0.2s; resize:none; }
+.form-input:focus,.form-textarea:focus { border-color:var(--indigo); box-shadow:0 0 0 3px rgba(79,70,229,0.1); }
+.form-textarea { height:130px; }
+.btn-submit { background:var(--grad1); color:white; border:none; padding:15px 36px; font-family:'Syne',sans-serif; font-weight:700; font-size:0.92rem; border-radius:50px; cursor:pointer; box-shadow:0 8px 24px rgba(79,70,229,0.35); transition:transform 0.2s,box-shadow 0.2s; align-self:flex-start; display:flex; align-items:center; gap:8px; }
+.btn-submit:hover { transform:translateY(-3px); box-shadow:0 14px 36px rgba(79,70,229,0.45); }
+
+footer { background:var(--text); padding:40px 60px; display:flex; justify-content:space-between; align-items:center; position:relative; z-index:1; flex-wrap:wrap; gap:16px; }
+.footer-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.2rem; color:white; }
+.footer-copy { font-size:0.8rem; color:rgba(255,255,255,0.5); }
+.footer-links { display:flex; gap:24px; }
+.footer-links a { font-size:0.8rem; font-weight:600; color:rgba(255,255,255,0.6); text-decoration:none; transition:color 0.2s; }
+.footer-links a:hover { color:white; }
+
+.reveal { opacity:0; transform:translateY(32px); transition:opacity 0.7s ease,transform 0.7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal-delay-1{transition-delay:0.1s} .reveal-delay-2{transition-delay:0.2s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:5px} ::-webkit-scrollbar-track{background:var(--bg)} ::-webkit-scrollbar-thumb{background:var(--indigo);border-radius:10px}
+
+@media(max-width:900px){
+  nav{padding:14px 20px;} .nav-links{display:none;}
+  .hero{padding:90px 20px 60px;} .hero-inner{grid-template-columns:1fr;}
+  section{padding:70px 20px;}
+  .about-grid,.contact-wrap{grid-template-columns:1fr;gap:40px;}
+  .projects-grid{grid-template-columns:1fr;} .project-card.featured{grid-column:auto;}
+  .skills-grid{grid-template-columns:1fr 1fr;}
+  .cta-banner{padding:60px 20px;}
+  footer{padding:32px 20px;flex-direction:column;text-align:center;}
+  .form-row{grid-template-columns:1fr;}
+}
+@media(max-width:520px){.skills-grid{grid-template-columns:1fr;} .hero-mini-cards{flex-direction:column;}}
+</style>
+</head>
+<body>
+<div class="bg-blobs">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Gul Andam</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:gullandam8@gmail.com" class="nav-cta">✦ Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag"><span class="dot"></span> Available for Work</div>
+      <h1 class="hero-title">AI &amp;<br><span class="grad-text">Machine Learning</span><br>Engineer</h1>
+      <p class="hero-sub">Building <strong>high-accuracy AI systems</strong> for healthcare &amp; mental health. Specialized in <strong>NLP with BERT</strong>, predictive ML models, and explainable AI. Based in <strong>Dera Ghazi Khan, Pakistan 🇵🇰</strong></p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-primary">🚀 View My Work</a>
+        <a href="https://wa.me/923326235410" target="_blank" class="btn-secondary">💬 WhatsApp Me</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-top">
+          <span class="card-label">Asthma Prediction Model</span>
+          <span class="card-badge">✓ Live</span>
+        </div>
+        <div class="accuracy-num">97%</div>
+        <div class="accuracy-bar"><div class="accuracy-fill"></div></div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-top:6px;">Accuracy · Random Forest + XGBoost + SHAP</div>
+      </div>
+      <div class="hero-mini-cards">
+        <div class="mini-card"><div class="mini-num">4+</div><div class="mini-label">AI Projects</div></div>
+        <div class="mini-card"><div class="mini-num">2</div><div class="mini-label">Research Papers</div></div>
+        <div class="mini-card"><div class="mini-num">0.83</div><div class="mini-label">Churn AUC Score</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">✦ Who I Am</div>
+  <h2 class="section-title">Turning Data Into<br><em>Intelligent Solutions</em></h2>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>I'm <strong>Gul Andam</strong>, a Machine Learning and NLP engineer from <strong>Dera Ghazi Khan, Pakistan</strong>. My work sits at the intersection of AI research and real-world impact — building systems that detect depression, predict asthma, and analyze behavioral patterns from text.</p>
+      <p>My focus is <strong>healthcare AI and mental health detection</strong> using transformer models like BERT. Every model I build includes SHAP-based explainability so clinicians and researchers can understand and trust the predictions.</p>
+      <p>Studying at <strong>Ghazi University</strong> and actively open to freelance projects, research collaborations, and AI engineering opportunities worldwide.</p>
+      <br>
+      <a href="https://www.fiverr.com/gul_andam_8" target="_blank" class="btn-primary" style="font-size:0.88rem;padding:12px 26px;margin-top:8px;">🟢 Hire Me on Fiverr</a>
+    </div>
+    <div class="about-info-card reveal reveal-delay-1">
+      <div class="info-row"><span class="info-key">📍 Location</span><span class="info-val">Dera Ghazi Khan, Pakistan</span></div>
+      <div class="info-row"><span class="info-key">🎓 University</span><span class="info-val">Ghazi University, DGK</span></div>
+      <div class="info-row"><span class="info-key">🎯 Focus</span><span class="info-val">ML · NLP · Data Analytics · Healthcare AI</span></div>
+      <div class="info-row"><span class="info-key">📞 Phone</span><span class="info-val">+92 332 623 5410</span></div>
+      <div class="info-row"><span class="info-key">✉️ Email</span><span class="info-val">gullandam8@gmail.com</span></div>
+      <div class="info-row"><span class="info-key">🔥 Status</span><span class="info-val"><span class="open-badge"><span class="dot"></span> Open to Work</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">✦ What I Know</div>
+  <h2 class="section-title">Core <em>Skills</em> &amp;<br>Technologies</h2>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon-wrap ic-1">🤖</div>
+      <div class="skill-name">Machine Learning</div>
+      <div class="skill-desc">Building and optimizing predictive models with ensemble methods. Expert in evaluation metrics and SHAP explainability.</div>
+      <div class="skill-tags"><span class="skill-tag">Scikit-learn</span><span class="skill-tag">XGBoost</span><span class="skill-tag">SHAP</span><span class="skill-tag">Random Forest</span></div>
+    </div>
+    <div class="skill-card reveal reveal-delay-1">
+      <div class="skill-icon-wrap ic-2">🧠</div>
+      <div class="skill-name">NLP &amp; Transformers</div>
+      <div class="skill-desc">Fine-tuning BERT for sentiment analysis, emotion detection, and mental health text classification with temporal tracking.</div>
+      <div class="skill-tags"><span class="skill-tag">BERT</span><span class="skill-tag">HuggingFace</span><span class="skill-tag">PyTorch</span><span class="skill-tag">Transformers</span></div>
+    </div>
+    <div class="skill-card reveal reveal-delay-2">
+      <div class="skill-icon-wrap ic-3">🏥</div>
+      <div class="skill-name">Healthcare AI</div>
+      <div class="skill-desc">Applying AI to real medical problems — asthma prediction, depression detection, and responsible clinical decision support.</div>
+      <div class="skill-tags"><span class="skill-tag">Medical ML</span><span class="skill-tag">Clinical NLP</span><span class="skill-tag">Explainable AI</span></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon-wrap ic-4">📊</div>
+      <div class="skill-name">Data Analysis</div>
+      <div class="skill-desc">EDA, feature engineering, and visualization to uncover patterns and prepare clean pipelines for modeling.</div>
+      <div class="skill-tags"><span class="skill-tag">Pandas</span><span class="skill-tag">NumPy</span><span class="skill-tag">Matplotlib</span><span class="skill-tag">Seaborn</span></div>
+    </div>
+    <div class="skill-card reveal reveal-delay-1">
+      <div class="skill-icon-wrap ic-5">🔬</div>
+      <div class="skill-name">AI Research</div>
+      <div class="skill-desc">Systematic literature reviews, comparative studies, and trend analysis with published academic findings.</div>
+      <div class="skill-tags"><span class="skill-tag">ResearchGate</span><span class="skill-tag">Benchmarking</span><span class="skill-tag">Literature Review</span></div>
+    </div>
+    <div class="skill-card reveal reveal-delay-2">
+      <div class="skill-icon-wrap ic-6">🐍</div>
+      <div class="skill-name">Python &amp; Tools</div>
+      <div class="skill-desc">End-to-end ML workflows in Python — data preprocessing, model training, evaluation, and clean reproducible notebooks.</div>
+      <div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">Jupyter</span><span class="skill-tag">Google Colab</span><span class="skill-tag">GitHub</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DATA ANALYTICS SKILLS ROW -->
+<section id="analytics-skills" style="background:white;padding-top:0">
+  <div class="skills-grid" style="max-width:1100px">
+    <div class="skill-card reveal" style="--nth:7">
+      <div class="skill-icon-wrap" style="background:rgba(14,165,233,0.1)">🗄️</div>
+      <div class="skill-name">SQL &amp; Databases</div>
+      <div class="skill-desc">Designing relational databases, writing complex analytical queries, and extracting business insights at scale using SQLite.</div>
+      <div class="skill-tags"><span class="skill-tag">SQLite</span><span class="skill-tag">SQL Queries</span><span class="skill-tag">Database Design</span><span class="skill-tag">Aggregations</span></div>
+    </div>
+    <div class="skill-card reveal reveal-delay-1">
+      <div class="skill-icon-wrap" style="background:rgba(249,115,22,0.1)">📊</div>
+      <div class="skill-name">Power BI &amp; Dashboards</div>
+      <div class="skill-desc">Building interactive business dashboards with DAX measures, KPI cards, slicers, and multi-page reports for executive reporting.</div>
+      <div class="skill-tags"><span class="skill-tag">Power BI</span><span class="skill-tag">DAX</span><span class="skill-tag">KPI Design</span><span class="skill-tag">Data Viz</span></div>
+    </div>
+    <div class="skill-card reveal reveal-delay-2">
+      <div class="skill-icon-wrap" style="background:rgba(16,185,129,0.1)">🚀</div>
+      <div class="skill-name">App Deployment</div>
+      <div class="skill-desc">Building and deploying interactive data science web apps with Streamlit — from local development to live cloud deployment on Streamlit Cloud.</div>
+      <div class="skill-tags"><span class="skill-tag">Streamlit</span><span class="skill-tag">GitHub</span><span class="skill-tag">Cloud Deploy</span><span class="skill-tag">Web Apps</span></div>
+    </div>
+  </div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">✦ What I've Built</div>
+  <h2 class="section-title">Featured <em>Projects</em></h2>
+  <div class="projects-grid">
+
+    <!-- E-COMMERCE — NEW FEATURED -->
+    <div class="project-card featured reveal" style="background:linear-gradient(135deg,#0f1117 0%,#1a1a2e 50%,#16213e 100%)">
+      <div class="project-num" style="color:rgba(200,184,255,0.6)">01 — FEATURED PROJECT · LIVE APP</div>
+      <div class="project-title" style="color:white;font-size:1.6rem">🛒 E-Commerce Customer Behavior Analysis</div>
+      <p class="project-desc" style="color:rgba(255,255,255,0.75)">End-to-end data science project analyzing 600K+ real customer events to uncover $648,000 in hidden revenue. Built a full pipeline from raw data cleaning → SQL database → EDA → Power BI dashboard → ML churn model → live deployed Streamlit web app.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 8px">
+        <div style="background:rgba(124,58,237,0.2);border:1px solid rgba(124,58,237,0.4);border-radius:12px;padding:10px 16px;text-align:center">
+          <div style="font-size:1.4rem;font-weight:800;color:#c8b8ff">600K+</div>
+          <div style="font-size:0.68rem;color:rgba(255,255,255,0.5);margin-top:2px">Events Analyzed</div>
+        </div>
+        <div style="background:rgba(6,182,212,0.2);border:1px solid rgba(6,182,212,0.4);border-radius:12px;padding:10px 16px;text-align:center">
+          <div style="font-size:1.4rem;font-weight:800;color:#67e8f9">0.83</div>
+          <div style="font-size:0.68rem;color:rgba(255,255,255,0.5);margin-top:2px">ML AUC Score</div>
+        </div>
+        <div style="background:rgba(16,185,129,0.2);border:1px solid rgba(16,185,129,0.4);border-radius:12px;padding:10px 16px;text-align:center">
+          <div style="font-size:1.4rem;font-weight:800;color:#6ee7b7">$648K</div>
+          <div style="font-size:0.68rem;color:rgba(255,255,255,0.5);margin-top:2px">Revenue Found</div>
+        </div>
+        <div style="background:rgba(245,158,11,0.2);border:1px solid rgba(245,158,11,0.4);border-radius:12px;padding:10px 16px;text-align:center">
+          <div style="font-size:1.4rem;font-weight:800;color:#fcd34d">19%</div>
+          <div style="font-size:0.68rem;color:rgba(255,255,255,0.5);margin-top:2px">Revenue Uplift</div>
+        </div>
+      </div>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span><span class="stack-tag">Pandas</span><span class="stack-tag">SQL</span><span class="stack-tag">Power BI</span><span class="stack-tag">Scikit-learn</span><span class="stack-tag">Streamlit</span><span class="stack-tag">Gradient Boosting</span><span class="stack-tag">GitHub</span>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+        <a href="https://ecommerce-analytics-vtotvskozgzi9ew7yqhvyt.streamlit.app/" target="_blank" class="project-link" style="background:rgba(124,58,237,0.9);color:white;border-color:transparent">🚀 Live App →</a>
+        <a href="https://github.com/Gul-Andam/ecommerce-analytics" target="_blank" class="project-link">GitHub →</a>
+      </div>
+    </div>
+
+    <!-- ASTHMA -->
+    <div class="project-card featured reveal">
+      <div class="project-num">02 — FEATURED PROJECT</div>
+      <div class="project-title">Asthma Prediction ML System</div>
+      <p class="project-desc">High-accuracy asthma prediction model with Random Forest and XGBoost. Integrated SHAP explainability so clinicians understand what drives each prediction — making it trustworthy for real clinical use.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span><span class="stack-tag">Random Forest</span><span class="stack-tag">XGBoost</span><span class="stack-tag">SHAP</span><span class="stack-tag">ROC-AUC</span>
+      </div>
+      <a href="https://github.com/Gul-Andam/Asthma-Prediction-ML" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-num">03</div>
+      <div class="project-title">Depression Detection via BERT</div>
+      <p class="project-desc">Transformer-based NLP system detecting depression from text. Combines sentiment analysis, emotion classification, and temporal behavior tracking using fine-tuned BERT.</p>
+      <div class="project-stack"><span class="stack-tag">BERT</span><span class="stack-tag">PyTorch</span><span class="stack-tag">Sentiment Analysis</span><span class="stack-tag">Temporal NLP</span></div>
+      <a href="https://github.com/Gul-Andam/Depression-Detection-using-BERT" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+    <div class="project-card reveal reveal-delay-1">
+      <div class="project-num">04</div>
+      <div class="project-title">Depression Detection Trends Analysis</div>
+      <p class="project-desc">Comparative research study analyzing ML, DL, and BERT approaches for depression detection. Benchmarks models, identifies research gaps, and contributes to academic literature.</p>
+      <div class="project-stack"><span class="stack-tag">Research</span><span class="stack-tag">Model Comparison</span><span class="stack-tag">Literature Review</span><span class="stack-tag">NLP</span></div>
+      <a href="https://github.com/Gul-Andam/Comparative-study-Depression-Detection-Trends-Analysis" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-label">✦ Academic Work</div>
+  <h2 class="section-title">Research &amp;<br><em>Publications</em></h2>
+  <div class="research-list">
+    <div class="research-card reveal">
+      <div class="research-num-badge rn-1">01</div>
+      <div>
+        <div class="research-title">Comparative Study of Depression Detection: Trends &amp; Analysis</div>
+        <p class="research-desc">Systematic review and trend analysis of ML and NLP approaches for automated depression detection. Compares classical ML, deep learning, and BERT-based transformer methods across datasets and metrics, identifying key research gaps.</p>
+        <div class="research-tags"><span class="r-tag">NLP</span><span class="r-tag">Mental Health AI</span><span class="r-tag">Comparative Study</span><span class="r-tag">ResearchGate</span></div>
+      </div>
+    </div>
+    <div class="research-card reveal">
+      <div class="research-num-badge rn-2">02</div>
+      <div>
+        <div class="research-title">Explainable AI in Clinical Prediction Systems</div>
+        <p class="research-desc">Research into building explainable AI for clinical decision support using SHAP, making black-box ML models interpretable for healthcare providers. Asthma prediction system as primary case study — achieving 97% accuracy.</p>
+        <div class="research-tags"><span class="r-tag">Explainable AI</span><span class="r-tag">Healthcare ML</span><span class="r-tag">SHAP</span><span class="r-tag">Clinical AI</span></div>
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <a href="https://www.researchgate.net/profile/Gul-Andam-2" target="_blank" class="btn-secondary">🔬 View ResearchGate Profile →</a>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <h2>Ready to Build Something Intelligent?</h2>
+  <p>Available for freelance projects, research collaborations, and full-time opportunities worldwide.</p>
+  <div class="cta-banner-btns">
+    <a href="mailto:gullandam8@gmail.com" class="btn-white">✉️ Email Me Now</a>
+    <a href="https://wa.me/923326235410" target="_blank" class="btn-outline-white">💬 WhatsApp +92 332 623 5410</a>
+    <a href="https://www.fiverr.com/gul_andam_8" target="_blank" class="btn-outline-white">🟢 Hire on Fiverr</a>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">✦ Get In Touch</div>
+  <h2 class="section-title">Let's Work<br><em>Together</em></h2>
+  <div class="contact-wrap">
+    <div class="contact-left reveal">
+      <h3>Open for Collaborations</h3>
+      <p>Have an AI/ML project, need a model built, or want to discuss freelance work? I respond within 24 hours.</p>
+      <div class="contact-items">
+        <a href="mailto:gullandam8@gmail.com" class="contact-item">
+          <div class="contact-icon ci-1">✉</div>
+          <div><span class="contact-item-label">Email</span><span class="contact-item-val">gullandam8@gmail.com</span></div>
+        </a>
+        <a href="https://wa.me/923326235410" target="_blank" class="contact-item">
+          <div class="contact-icon ci-wa">💬</div>
+          <div><span class="contact-item-label">WhatsApp</span><span class="contact-item-val">+92 332 623 5410</span></div>
+        </a>
+        <a href="https://www.fiverr.com/gul_andam_8" target="_blank" class="contact-item">
+          <div class="contact-icon ci-5">🟢</div>
+          <div><span class="contact-item-label">Fiverr</span><span class="contact-item-val">fiverr.com/gul_andam_8</span></div>
+        </a>
+        <a href="https://www.linkedin.com/in/gull-andam-48a2a1331/" target="_blank" class="contact-item">
+          <div class="contact-icon ci-2">in</div>
+          <div><span class="contact-item-label">LinkedIn</span><span class="contact-item-val">gull-andam-48a2a1331</span></div>
+        </a>
+        <a href="https://github.com/Gul-Andam" target="_blank" class="contact-item">
+          <div class="contact-icon ci-3">⌥</div>
+          <div><span class="contact-item-label">GitHub</span><span class="contact-item-val">github.com/Gul-Andam</span></div>
+        </a>
+        <a href="https://www.researchgate.net/profile/Gul-Andam-2" target="_blank" class="contact-item">
+          <div class="contact-icon ci-4">🔬</div>
+          <div><span class="contact-item-label">ResearchGate</span><span class="contact-item-val">Gul-Andam Research Profile</span></div>
+        </a>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" placeholder="e.g. Ahmed Khan"></div>
+          <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="your@email.com"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Subject</label><input type="text" class="form-input" placeholder="e.g. ML Freelance Project"></div>
+        <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Tell me about your project or idea..."></textarea></div>
+        <button class="btn-submit" onclick="window.location.href='mailto:gullandam8@gmail.com'">Send Message 🚀</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Gul Andam</div>
+  <div class="footer-copy">© 2025 Gul Andam · AI &amp; ML Engineer · Pakistan 🇵🇰</div>
+  <div class="footer-links">
+    <a href="https://github.com/Gul-Andam" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/gull-andam-48a2a1331/" target="_blank">LinkedIn</a>
+    <a href="https://www.fiverr.com/gul_andam_8" target="_blank">Fiverr</a>
+    <a href="https://www.researchgate.net/profile/Gul-Andam-2" target="_blank">ResearchGate</a>
+    <a href="mailto:gullandam8@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold: 0.1});
+  reveals.forEach(el => obs.observe(el));
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.boxShadow = window.scrollY > 40 ? '0 4px 30px rgba(79,70,229,0.12)' : 'none';
+  });
+</script>
+</body>
+</html>
